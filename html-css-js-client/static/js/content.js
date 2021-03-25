@@ -1,7 +1,7 @@
 function renderHomepage(){
     const logo = document.createElement('img');
     logo.id = 'logo';
-    logo.src = '../assets/hamilton-title';
+    logo.src = 'https://i.imgur.com/OrNFudj.jpg';
     logo.alt = 'Hamilton title'
     main.appendChild(logo);
 }
