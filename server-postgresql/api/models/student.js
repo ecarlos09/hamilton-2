@@ -4,7 +4,7 @@ class Student {
     constructor(data) {
         this.id = data.id;
         this.name = data.name;
-        this.username=username;
+        this.username = data.username;
         this.repos = data.repos;
     }
 
