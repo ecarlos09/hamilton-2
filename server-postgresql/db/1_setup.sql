@@ -11,7 +11,7 @@ CREATE TABLE students (
 DROP TABLE IF EXISTS partners;
 
 CREATE TABLE partners (
-     id serial PRIMARY KEY,
+    id serial PRIMARY KEY,
     name varchar(255) NOT NULL,
     location varchar(255)
 );

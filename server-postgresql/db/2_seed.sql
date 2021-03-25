@@ -3,7 +3,7 @@ VALUES
     ('Coca Cola', 'Marylebone'),
     ('Babylon Health', 'Chelsea');
 
-INSERT INTO students (name, username, repos, partner_id)
+INSERT INTO students (name, git_username, repos, partner_id)
 VALUES
     ('Aaron', 'HeyAero', 26, null),
     ('Adil', 'AdilIqbal95', 12, null),
