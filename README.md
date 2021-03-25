@@ -1,5 +1,3 @@
-## N.B. Now on dev branch!
-
 # Elwin recreates the Hamilton Cohort
 
 Welcome!  For this project, I will be making a simple API that connects to a database.  If I have time, I will add a client side that enables users to view cohort members and their number of publically available Github repos,  as well as add and delete cohort members.  Finally, I would like to add an option for increasing and decreasing the number of publically available Gkithub repos for each member of the cohort.
