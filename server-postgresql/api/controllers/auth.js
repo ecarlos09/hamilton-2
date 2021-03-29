@@ -1,6 +1,10 @@
+require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
+
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
 
@@ -27,7 +31,14 @@ router.post('/login', async (req,res) => {
         };
         const authed = bcrypt.compare(req.body.password, user.passwordDigest);
         if(authed) {
-            res.status(200).json({user: user.username});            
+            const payload = {username: user.username, email: user.email};
+            const sendToken = (err, token) => {
+                if(err) {throw new Error('Error in token generation')};
+                res.status(200).json({
+                    success: true,
+                    token: "Bearer" + token
+                });                
+            }                       
         } else {
             throw new Error ('User could not be authenticated.  Retry login.');
         }
