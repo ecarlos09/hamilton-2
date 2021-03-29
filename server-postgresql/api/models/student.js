@@ -58,6 +58,17 @@ class Student {
         });
     };
 
+    //Method for deleting a student
+    // destroy() {
+    //     return new Promise (async (resolve, reject) => {
+    //         try {
+                
+    //         } catch (err) {
+                
+    //         }
+    //     });
+    // };
+    
 }
 
 module.exports = Student;
