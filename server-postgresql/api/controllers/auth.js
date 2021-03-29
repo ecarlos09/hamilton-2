@@ -36,9 +36,10 @@ router.post('/login', async (req,res) => {
                 if(err) {throw new Error('Error in token generation')};
                 res.status(200).json({
                     success: true,
-                    token: "Bearer" + token
+                    token: "Bearer" + token,
                 });                
-            }                       
+            }
+            jwt.sign(payload, process.env.SECRET, { expiresIn: 60 }, sendToken);                       
         } else {
             throw new Error ('User could not be authenticated.  Retry login.');
         }

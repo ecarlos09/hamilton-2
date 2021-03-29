@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
 
+const { verifyToken } = require('../middleware/auth');
+
 const Student = require('../models/student');
 
 //Index route for all students
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const students = await Student.all;
         res.status(200).json({students});
@@ -14,7 +16,7 @@ router.get('/', async (req, res) => {
 });
 
 //Route for retrieving indvidual students
-router.get('/:id', async(req, res) => {
+router.get('/:id', verifyToken, async(req, res) => {
     try {
         const student = await Student.findById(parseInt(req.params.id));
         res.status(200).json(student);                
@@ -24,7 +26,7 @@ router.get('/:id', async(req, res) => {
 })
 
 //Route for creating a new student
-router.post('/', async (req, res) => {
+router.post('/', verifyToken, async (req, res) => {
     try {
         const student = await Student.create(req.body.name, req.body.username, req.body.repos);
         res.status(201).json(student);
@@ -34,7 +36,7 @@ router.post('/', async (req, res) => {
 })
 
 //Route for updating an existing student
-router.patch('/:id', async (req, res) => {
+router.patch('/:id', verifyToken, async (req, res) => {
     try {
         const student = await Student.findById(parseInt(req.params.id));
         const updatedStudent = await student.update(req.body.name, req.body.username, req.body.repos);
@@ -44,13 +46,13 @@ router.patch('/:id', async (req, res) => {
     }
 })
 
-// //Route for removing a student from the cohort
-// router.delete('/:id', async (req, res) => {
-//     try {
+//Route for removing a student from the cohort
+router.delete('/:id', async (req, res) => {
+    try {
 
-//     } catch {
+    } catch {
 
-//     }
-// })
+    }
+})
 
 module.exports = router;

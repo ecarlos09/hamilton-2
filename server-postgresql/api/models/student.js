@@ -1,4 +1,5 @@
 const db = require('../dbConfig');
+const SQL = require('sql-template-strings');
 
 class Student {
     constructor(data) {
@@ -11,7 +12,7 @@ class Student {
     static get all() {
         return new Promise (async (resolve, reject) => {
             try {
-                const studentsData = await db.query(`SELECT * FROM students;`);
+                const studentsData = await db.query(SQL`SELECT * FROM students;`);
                 const students = studentsData.rows.map(s => new Student(s));
                 resolve(students);
             } catch (err) {

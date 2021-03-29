@@ -23,7 +23,7 @@ class User {
     static create({username, email, password}) {
         return new Promise (async (resolve, reject) => {
             try {
-                let result = await db.run(SQL`INSERT INTO users(username, email, password_digest)
+                let result = await db.run(`INSERT INTO users(username, email, password_digest)
                                                 VALUES (${username}, ${email}, ${password}) RETURNING *;`);
             } catch(err) {
                 reject(`Error creating user: ${err}`);
@@ -34,7 +34,7 @@ class User {
     static findByEmail(email) {
         return new Promise (async (resolve, reject) => {
             try {
-                let result = await db.run(SQL`SELECT * FROM users WHERE email = ${email};`);
+                let result = await db.run(`SELECT * FROM users WHERE email = ${email};`);
                 let user = new User(result.rows[0]);
                 resolve(user);
             } catch(err) {
