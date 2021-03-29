@@ -2,7 +2,7 @@ version: '3'
 services:
   api:
     image: node:14.15.5
-    working_dir: /server
+    working_dir: /code
     ports: 
       - 3000:3000
     environment:
@@ -17,7 +17,7 @@ services:
     volumes:
       - type: bind
         source: ./api
-        target: /server
+        target: /code
     command: bash -c "npm install && npm run dev"
 
   db:
@@ -26,7 +26,7 @@ services:
       - "5432"
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-      - "./db/setup/:docker-entrypoint-initdb.d/:ro"
+      - "./db:/docker-entrypoint-initdb.d/:ro"
     environment: 
       - POSTGRES_DB=hamilton
       - POSTGRES_USER=elwin
