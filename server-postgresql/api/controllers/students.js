@@ -33,14 +33,16 @@ router.post('/', async (req, res) => {
     }
 })
 
-// //Route for updating an existing student
-// router.patch('/:id', async (req, res) => {
-//     try {
-
-//     } catch {
-
-//     }
-// })
+//Route for updating an existing student
+router.patch('/:id', async (req, res) => {
+    try {
+        const student = await Student.findById(parseInt(req.params.id));
+        const updatedStudent = await student.update(req.body.name, req.body.username, req.body.repos);
+        res.status(200).json({student: updatedStudent});      
+    } catch(err) {
+        res.status(500).json({err});
+    }
+})
 
 // //Route for removing a student from the cohort
 // router.delete('/:id', async (req, res) => {

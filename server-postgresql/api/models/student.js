@@ -45,6 +45,19 @@ class Student {
         });
     };
 
+    // Method for updating a student
+    update() {
+        return new Promise (async (resolve, reject) => {
+            try {
+                let updatedStudentData = await db.query(`UPDATE students SET repos = repos + 1 WHERE id=$1 RETURNING *;`, [ this.id]);
+                let updatedStudent = new Student(updatedStudentData[0]);
+                resolve(updatedStudent);
+            } catch (err) {
+                reject('Student could not be updated');
+            }
+        });
+    };
+
 }
 
 module.exports = Student;
