@@ -46,23 +46,26 @@ function renderRegisterForm() {
 }
 
 async function renderStudents() {
-    const feed = document.createElement('section');
-    feed.id = 'feed';
+    const studentTable = document.createElement('section');
+    studentTable.id = 'student-table';
     const students = await getAllStudents();
     if(students.err){return}
     const renderStudent = studentData => {
         const student = document.createElement('div');
         student.className = 'student';
         const name = document.createElement('h3');
-        // const gitUsername = document.createElement('p');
-        name.textContent = postData.name;
-        // body.textContent = postData.body;
+        const userName = document.createElement('p');
+        const repos = document.createElement('p');
+        name.textContent = studentData.name;
+        userName.textContent = studentData.username;
+        repos.textContent = studentData.repos;
         student.appendChild(name);
-        // post.appendChild(body);
-        feed.appendChild(student);
+        student.appendChild(userName);
+        student.appendChild(repos);
+        studentTable.appendChild(student);
     }
     students.forEach(renderStudent);
-    main.appendChild(feed);
+    main.appendChild(studentTable);
 }
 
 function renderProfile() {
