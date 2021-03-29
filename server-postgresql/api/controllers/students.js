@@ -13,14 +13,15 @@ router.get('/', async (req, res) => {
     };
 });
 
-// //Route for retrieving indvidual students
-// router.get('/:name', async(req, res) => {
-//     try {
-        
-//     } catch {
-
-//     }
-// })
+//Route for retrieving indvidual students
+router.get('/:id', async(req, res) => {
+    try {
+        const student = await Student.findById(parseInt(req.params.id));
+        res.json(student);                
+    } catch(err) {
+        res.status(404).json({err});
+    }
+})
 
 // //Route for creating a new student
 // router.post('/', async (req, res) => {

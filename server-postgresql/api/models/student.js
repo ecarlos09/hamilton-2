@@ -20,15 +20,17 @@ class Student {
         })
     }
 
-    // static findByName(name) {
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
-
-    //         } catch (err) {
-
-    //         }
-    //     })
-    // }
+    static findById(id) {
+        return new Promise (async (resolve, reject) => {
+            try {
+                let studentData = await db.query(`SELECT * FROM students WHERE id=$1;`, [ id ]);
+                let student = new Student(studentData.rows[0]);
+                resolve(student);
+            } catch (err) {
+                reject('Student could not be found.');
+            }
+        })
+    }
 
     // static findByName(name) {
     //     return new Promise (async (resolve, reject) => {
