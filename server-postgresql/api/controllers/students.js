@@ -7,7 +7,7 @@ const Student = require('../models/student');
 router.get('/', async (req, res) => {
     try {
         const students = await Student.all;
-        res.json({students});
+        res.status(200).json({students});
     } catch(err) {
         res.status(500).json({err});
     };
@@ -17,20 +17,21 @@ router.get('/', async (req, res) => {
 router.get('/:id', async(req, res) => {
     try {
         const student = await Student.findById(parseInt(req.params.id));
-        res.json(student);                
+        res.status(200).json(student);                
     } catch(err) {
         res.status(404).json({err});
     }
 })
 
-// //Route for creating a new student
-// router.post('/', async (req, res) => {
-//     try {
-
-//     } catch {
-
-//     }
-// })
+//Route for creating a new student
+router.post('/', async (req, res) => {
+    try {
+        const student = await Student.create(req.body.name, req.body.username, req.body.repos);
+        res.status(201).json(student);
+    } catch(err) {
+        res.status(404).json({err});   
+    }
+})
 
 // //Route for updating an existing student
 // router.patch('/:id', async (req, res) => {

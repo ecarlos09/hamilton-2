@@ -17,8 +17,8 @@ class Student {
             } catch (err) {
                 reject("Error retrieving cohort members!");
             }
-        })
-    }
+        });
+    };
 
     static findById(id) {
         return new Promise (async (resolve, reject) => {
@@ -29,18 +29,22 @@ class Student {
             } catch (err) {
                 reject('Student could not be found.');
             }
-        })
-    }
+        });
+    };
 
-    // static findByName(name) {
-    //     return new Promise (async (resolve, reject) => {
-    //         try {
+    // Method for creating a new student
+    static create(name, username, repos) {
+        return new Promise (async (resolve, reject) => {
+            try{
+                let studentData = await db.query(`INSERT INTO students (name, username, repos) VALUE ($1, $2, $3) RETURNING *;`, [name, username, repos]);
+                let newStudent = new Student(studentData.rows[0]);
+                resolve(newStudent);
+            } catch(err) {
+                reject('Error creating student');
+            }
+        });
+    };
 
-    //         } catch (err) {
-                
-    //         }
-    //     })
-    // }
 }
 
 module.exports = Student;
